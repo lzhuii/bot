@@ -6,7 +6,7 @@ package bot.constant;
  * @author hui
  * @since 2023-12-10 00:02:53
  */
-public class OpCode {
+public class Opcode {
 	/**
 	 * 服务端进行消息推送
 	 */

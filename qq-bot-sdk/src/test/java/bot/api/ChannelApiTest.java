@@ -2,59 +2,67 @@ package bot.api;
 
 
 import bot.config.ChannelApiConfig;
-import bot.constant.ChannelSubType;
 import bot.constant.ChannelType;
-import bot.model.Channel;
-import bot.model.Guild;
-import bot.model.Member;
+import bot.model.*;
 import bot.model.request.ChannelRequest;
 import bot.model.request.MemberRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import bot.model.response.ApiPermissionResponse;
+import bot.model.response.MemberResponse;
+import bot.model.response.RoleResponse;
+import bot.util.JsonUtil;
 import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
 @SpringBootTest(classes = {ChannelApiConfig.class})
 class ChannelApiTest {
+	private final Logger log = LoggerFactory.getLogger(ChannelApiTest.class);
+	
 	@Resource
 	ChannelApi channelApi;
 	
 	@Test
 	void me() {
-		print(channelApi.me());
+		User user = channelApi.me();
+		log.info(JsonUtil.obj2str(user));
 	}
 	
 	@Test
 	void guilds() {
-		print(channelApi.guilds());
+		List<Guild> guilds = channelApi.guilds();
+		log.info(JsonUtil.obj2str(guilds));
 	}
 	
 	@Test
 	void guild() {
-		print(channelApi.guild(guildId()));
+		Guild guild = channelApi.guild(guildId());
+		log.info(JsonUtil.obj2str(guild));
 	}
 	
 	@Test
 	void channels() {
-		print(channelApi.channels(guildId()));
+		List<Channel> channels = channelApi.channels(guildId());
+		log.info(JsonUtil.obj2str(channels));
 	}
 	
 	@Test
 	void channel() {
-		print(channelApi.channel(channelId()));
+		Channel channel = channelApi.channel(channelId());
+		log.info(JsonUtil.obj2str(channel));
 	}
 	
 	@Test
 	void createChannel() {
-		print(channelApi.createChannel(guildId(), ChannelRequest.builder()
+		Channel newChannel = channelApi.createChannel(guildId(), ChannelRequest.builder()
 				.name("测试")
 				.type(ChannelType.TEXT_CHANNEL)
-				.subType(ChannelSubType.CHAT)
 				.position(2)
-				.build()));
+				.build());
+		log.info(JsonUtil.obj2str(newChannel));
 	}
 	
 	@Test
@@ -63,9 +71,11 @@ class ChannelApiTest {
 		for (Channel channel : channels) {
 			if (channel.getName().equals("测试")) {
 				String channelId = channel.getId();
-				print(channelApi.updateChannel(channelId, ChannelRequest.builder()
+				Channel newChannel = channelApi.updateChannel(channelId, ChannelRequest.builder()
 						.name("测试1")
-						.build()));
+						.build());
+				log.info(JsonUtil.obj2str(newChannel));
+				break;
 			}
 		}
 	}
@@ -76,7 +86,9 @@ class ChannelApiTest {
 		for (Channel channel : channels) {
 			if (channel.getName().equals("测试1")) {
 				String channelId = channel.getId();
-				print(channelApi.deleteChannel(channelId));
+				Channel deletedChannel = channelApi.deleteChannel(channelId);
+				log.info(JsonUtil.obj2str(deletedChannel));
+				break;
 			}
 		}
 	}
@@ -87,47 +99,61 @@ class ChannelApiTest {
 		for (Channel channel : channels) {
 			if (channel.getType() == ChannelType.VOICE_CHANNEL || channel.getType() == ChannelType.LIVESTREAM_CHANNEL) {
 				String channelId = channel.getId();
-				System.out.println(channelApi.onlineNums(channelId));
+				log.info(channelApi.onlineNums(channelId));
+				break;
 			}
 		}
 	}
 	
 	@Test
 	void members() {
-		print(channelApi.members(guildId(), "0", 100));
-	}
-	
-	@Test
-	void membersByRole() {
-		print(channelApi.membersByRole(guildId(), "2", "0", 100));
-	}
-	
-	@Test
-	void member() {
-		print(channelApi.member(guildId(), userId()));
+		List<Member> members = channelApi.members(guildId(), "0", 10);
+		log.info(JsonUtil.obj2str(members));
 	}
 	
 	@Test
 	void deleteMember() {
-		channelApi.deleteMember(guildId(), userId(), MemberRequest.builder()
-				.addBlacklist(false)
-				.deleteHistoryMsgDays(0)
-				.build());
+		List<Member> members = channelApi.members(guildId(), "0", 10);
+		for (Member member : members) {
+			if (member.getNick().equals("临渊羡鱼")) {
+				String userId = member.getUser().getId();
+				channelApi.deleteMember(guildId(), userId, MemberRequest.builder()
+						.addBlacklist(false)
+						.deleteHistoryMsgDays(0)
+						.build());
+				break;
+			}
+		}
+	}
+	
+	@Test
+	void membersByRole() {
+		MemberResponse memberResponse = channelApi.membersByRole(guildId(), "2", "0", 10);
+		log.info(JsonUtil.obj2str(memberResponse));
+	}
+	
+	@Test
+	void member() {
+		Member member = channelApi.member(guildId(), userId());
+		log.info(JsonUtil.obj2str(member));
 	}
 	
 	@Test
 	void roles() {
-		print(channelApi.roles(guildId()));
-	}
-	
-	@Test
-	void gateway() {
-		print(channelApi.gateway());
+		RoleResponse roleResponse = channelApi.roles(guildId());
+		log.info(JsonUtil.obj2str(roleResponse));
 	}
 	
 	@Test
 	void apiPermission() {
-		print(channelApi.apiPermission(guildId()));
+		ApiPermissionResponse apiPermissionResponse = channelApi.apiPermission(guildId());
+		log.info(JsonUtil.obj2str(apiPermissionResponse));
+	}
+	
+	@Test
+	void gateway() {
+		Gateway gateway = channelApi.gateway();
+		log.info(JsonUtil.obj2str(gateway));
 	}
 	
 	String guildId() {
@@ -141,21 +167,7 @@ class ChannelApiTest {
 	}
 	
 	String userId() {
-		List<Member> members = channelApi.members(guildId(), "0", 100);
-		for (Member member : members) {
-			if (member.getNick().equals("临渊羡鱼")) {
-				return member.getUser().getId();
-			}
-		}
+		List<Member> members = channelApi.members(guildId(), "0", 10);
 		return members.get(0).getUser().getId();
-	}
-	
-	void print(Object obj) {
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			System.out.println(mapper.writeValueAsString(obj));
-		} catch (JsonProcessingException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }
