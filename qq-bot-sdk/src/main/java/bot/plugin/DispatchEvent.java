@@ -4,6 +4,8 @@ import bot.model.Payload;
 import org.springframework.context.ApplicationEvent;
 
 /**
+ * WebSocket 消息事件
+ *
  * @author hui
  * @since 2023-12-13 00:18:12
  */
