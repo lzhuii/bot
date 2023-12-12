@@ -1,15 +1,16 @@
 package bot.api;
 
 import bot.model.*;
+import bot.model.request.ChannelRequest;
+import bot.model.request.MemberRequest;
 import bot.model.request.MessageRequest;
+import bot.model.response.ApiPermissionResponse;
 import bot.model.response.MemberResponse;
 import bot.model.response.RoleResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.service.annotation.GetExchange;
-import org.springframework.web.service.annotation.HttpExchange;
-import org.springframework.web.service.annotation.PostExchange;
+import org.springframework.web.service.annotation.*;
 
 import java.util.List;
 
@@ -68,6 +69,36 @@ public interface ChannelApi {
 	Channel channel(@PathVariable String channelId);
 	
 	/**
+	 * 创建子频道
+	 *
+	 * @param guildId        频道ID
+	 * @param channelRequest 子频道信息
+	 *
+	 * @return Channel 对象
+	 */
+	@PostExchange("/guilds/{guildId}/channels")
+	Channel createChannel(@PathVariable String guildId, @RequestBody ChannelRequest channelRequest);
+	
+	/**
+	 * 修改子频道
+	 *
+	 * @param channelId      子频道ID
+	 * @param channelRequest 子频道信息
+	 *
+	 * @return Channel 对象
+	 */
+	@PatchExchange("/channels/{channelId}")
+	Channel updateChannel(@PathVariable String channelId, @RequestBody ChannelRequest channelRequest);
+	
+	/**
+	 * 删除子频道
+	 *
+	 * @param channelId 子频道ID
+	 */
+	@DeleteExchange("/channels/{channelId}")
+	Channel deleteChannel(@PathVariable String channelId);
+	
+	/**
 	 * 获取子频道在线成员数
 	 *
 	 * @param channelId 子频道ID
@@ -112,6 +143,17 @@ public interface ChannelApi {
 	Member member(@PathVariable String guildId, @PathVariable String userId);
 	
 	/**
+	 * 删除频道成员
+	 *
+	 * @param guildId 频道ID
+	 * @param userId  用户ID
+	 *
+	 * @return Member 对象
+	 */
+	@DeleteExchange("/guilds/{guildId}/members/{userId}")
+	void deleteMember(@PathVariable String guildId, @PathVariable String userId, @RequestBody MemberRequest memberRequest);
+	
+	/**
 	 * 获取频道身份组列表
 	 *
 	 * @param guildId 频道ID
@@ -132,9 +174,21 @@ public interface ChannelApi {
 	@PostExchange("/channels/{channelId}/messages")
 	Message sendMessage(@PathVariable String channelId, @RequestBody MessageRequest messageRequest);
 	
+	/**
+	 * 获取机器人在频道可用权限列表
+	 *
+	 * @param guildId 频道ID
+	 *
+	 * @return JSON字符串
+	 */
+	@GetExchange("/guilds/{guildId}/api_permission")
+	ApiPermissionResponse apiPermission(@PathVariable String guildId);
+	
+	/**
+	 * 获取通用 WSS 接入点
+	 *
+	 * @return Gateway 对象
+	 */
 	@GetExchange("/gateway")
 	Gateway gateway();
-	
-	@GetExchange("/guilds/{guildId}/api_permission")
-	String apiPermission(@PathVariable String guildId);
 }
