@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Guild {
 	/**
-	 * 频道ID
+	 * 频道 ID
 	 */
 	private String id;
 	/**
@@ -26,7 +26,7 @@ public class Guild {
 	 */
 	private String icon;
 	/**
-	 * 创建人用户ID
+	 * 创建人用户 ID
 	 */
 	@JsonProperty("owner_id")
 	private String ownerId;

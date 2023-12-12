@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Member {
 	/**
-	 * 频道ID
+	 * 频道 ID
 	 */
 	@JsonProperty("guild_id")
 	private String guildId;
@@ -27,7 +27,7 @@ public class Member {
 	 */
 	private String nick;
 	/**
-	 * 用户在频道内的身份组ID, 默认值可参考DefaultRoles
+	 * 用户在频道内的身份组 ID, 默认值可参考DefaultRoles
 	 */
 	private String[] roles;
 	/**

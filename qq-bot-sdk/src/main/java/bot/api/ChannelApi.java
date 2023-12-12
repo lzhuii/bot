@@ -15,7 +15,7 @@ import org.springframework.web.service.annotation.*;
 import java.util.List;
 
 /**
- * 频道API
+ * QQ频道 API 接口
  *
  * @author hui
  * @since 2023-12-09 09:07:47
@@ -41,7 +41,7 @@ public interface ChannelApi {
 	/**
 	 * 获取频道详情
 	 *
-	 * @param guildId 频道ID
+	 * @param guildId 频道 ID
 	 *
 	 * @return Guild 对象
 	 */
@@ -51,7 +51,7 @@ public interface ChannelApi {
 	/**
 	 * 获取子频道列表
 	 *
-	 * @param guildId 频道ID
+	 * @param guildId 频道 ID
 	 *
 	 * @return Channel 对象数组
 	 */
@@ -61,7 +61,7 @@ public interface ChannelApi {
 	/**
 	 * 获取子频道详情
 	 *
-	 * @param channelId 子频道ID
+	 * @param channelId 子频道 ID
 	 *
 	 * @return Channel 对象
 	 */
@@ -71,8 +71,8 @@ public interface ChannelApi {
 	/**
 	 * 创建子频道
 	 *
-	 * @param guildId        频道ID
-	 * @param channelRequest 子频道信息
+	 * @param guildId        频道 ID
+	 * @param channelRequest 子频道请求对象
 	 *
 	 * @return Channel 对象
 	 */
@@ -82,8 +82,8 @@ public interface ChannelApi {
 	/**
 	 * 修改子频道
 	 *
-	 * @param channelId      子频道ID
-	 * @param channelRequest 子频道信息
+	 * @param channelId      子频道 ID
+	 * @param channelRequest 子频道请求对象
 	 *
 	 * @return Channel 对象
 	 */
@@ -93,7 +93,9 @@ public interface ChannelApi {
 	/**
 	 * 删除子频道
 	 *
-	 * @param channelId 子频道ID
+	 * @param channelId 子频道 ID
+	 *
+	 * @return Channel 对象
 	 */
 	@DeleteExchange("/channels/{channelId}")
 	Channel deleteChannel(@PathVariable String channelId);
@@ -101,7 +103,7 @@ public interface ChannelApi {
 	/**
 	 * 获取子频道在线成员数
 	 *
-	 * @param channelId 子频道ID
+	 * @param channelId 子频道 ID
 	 *
 	 * @return JSON字符串
 	 */
@@ -111,7 +113,7 @@ public interface ChannelApi {
 	/**
 	 * 获取频道成员列表
 	 *
-	 * @param guildId 频道ID
+	 * @param guildId 频道 ID
 	 * @param after   上一次回包中最后一个member的user id， 如果是第一次请求填 0，默认为 0
 	 * @param limit   分页大小，1-400，默认是 1。成员较多的频道尽量使用较大的limit值，以减少请求数
 	 *
@@ -123,8 +125,8 @@ public interface ChannelApi {
 	/**
 	 * 获取频道身份组成员列表
 	 *
-	 * @param guildId 频道ID
-	 * @param roleId  身份组ID
+	 * @param guildId 频道 ID
+	 * @param roleId  身份组 ID
 	 *
 	 * @return Member 对象数组
 	 */
@@ -134,8 +136,8 @@ public interface ChannelApi {
 	/**
 	 * 获取频道成员详情
 	 *
-	 * @param guildId 频道ID
-	 * @param userId  用户ID
+	 * @param guildId 频道 ID
+	 * @param userId  用户 ID
 	 *
 	 * @return Member 对象
 	 */
@@ -145,10 +147,8 @@ public interface ChannelApi {
 	/**
 	 * 删除频道成员
 	 *
-	 * @param guildId 频道ID
-	 * @param userId  用户ID
-	 *
-	 * @return Member 对象
+	 * @param guildId 频道 ID
+	 * @param userId  用户 ID
 	 */
 	@DeleteExchange("/guilds/{guildId}/members/{userId}")
 	void deleteMember(@PathVariable String guildId, @PathVariable String userId, @RequestBody MemberRequest memberRequest);
@@ -156,9 +156,9 @@ public interface ChannelApi {
 	/**
 	 * 获取频道身份组列表
 	 *
-	 * @param guildId 频道ID
+	 * @param guildId 频道 ID
 	 *
-	 * @return RoleResp 对象
+	 * @return RoleResponse 对象
 	 */
 	@GetExchange("/guilds/{guildId}/roles")
 	RoleResponse roles(@PathVariable String guildId);
@@ -166,7 +166,7 @@ public interface ChannelApi {
 	/**
 	 * 发送消息
 	 *
-	 * @param channelId      子频道ID
+	 * @param channelId      子频道 ID
 	 * @param messageRequest 消息请求对象
 	 *
 	 * @return Message 对象
@@ -177,9 +177,9 @@ public interface ChannelApi {
 	/**
 	 * 获取机器人在频道可用权限列表
 	 *
-	 * @param guildId 频道ID
+	 * @param guildId 频道 ID
 	 *
-	 * @return JSON字符串
+	 * @return ApiPermissionResponse 对象
 	 */
 	@GetExchange("/guilds/{guildId}/api_permission")
 	ApiPermissionResponse apiPermission(@PathVariable String guildId);

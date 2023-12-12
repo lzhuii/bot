@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 接口权限
+ *
  * @author hui
  * @since 2023-12-12 12:58:17
  */

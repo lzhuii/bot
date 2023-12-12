@@ -14,11 +14,11 @@ import lombok.Setter;
 @Setter
 public class Channel {
 	/**
-	 * 子频道 id
+	 * 子频道 ID
 	 */
 	private String id;
 	/**
-	 * 频道 id
+	 * 频道 ID
 	 */
 	@JsonProperty("guild_id")
 	private String guildId;

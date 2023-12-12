@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class Role {
 	/**
-	 * 身份组ID
+	 * 身份组 ID
 	 */
 	private String id;
 	/**

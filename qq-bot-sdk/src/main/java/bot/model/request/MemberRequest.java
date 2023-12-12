@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 成员请求类型
+ *
  * @author hui
  * @since 2023-12-12 12:49:04
  */

@@ -1,6 +1,8 @@
 package bot.constant;
 
 /**
+ * 频道事件
+ *
  * @author hui
  * @since 2023-12-10 00:02:38
  */

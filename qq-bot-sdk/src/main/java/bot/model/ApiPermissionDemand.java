@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 接口权限需求对象
+ *
  * @author hui
  * @since 2023-12-12 13:00:11
  */
@@ -12,12 +14,12 @@ import lombok.Setter;
 @Setter
 public class ApiPermissionDemand {
 	/**
-	 * 频道 id
+	 * 频道 ID
 	 */
 	@JsonProperty("guild_id")
 	private String guildId;
 	/**
-	 * 接口权限需求授权链接发送的子频道 id
+	 * 接口权限需求授权链接发送的子频道 ID
 	 */
 	@JsonProperty("channel_id")
 	private String channelId;

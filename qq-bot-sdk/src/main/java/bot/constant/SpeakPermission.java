@@ -1,6 +1,8 @@
 package bot.constant;
 
 /**
+ * 子频道发言权限
+ *
  * @author hui
  * @since 2023-12-10 00:02:38
  */

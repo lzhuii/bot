@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class User {
 	/**
-	 * 用户 id
+	 * 用户 ID
 	 */
 	private String id;
 	/**

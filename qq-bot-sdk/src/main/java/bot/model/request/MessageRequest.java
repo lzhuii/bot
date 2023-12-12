@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 消息请求类型
+ *
  * @author hui
  * @since 2023-12-09 11:50:16
  */

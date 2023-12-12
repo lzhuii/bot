@@ -1,5 +1,8 @@
 package bot.constant;
+
 /**
+ * 子频道二级分类
+ *
  * @author hui
  * @since 2023-12-10 00:02:38
  */

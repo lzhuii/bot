@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.client.support.WebClientAdapter
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 /**
- * 频道API配置类
+ * QQ频道 API 接口配置类
  *
  * @author hui
  * @since 2023-12-09 09:07:47

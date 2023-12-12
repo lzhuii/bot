@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 创建 Session 限制信息
+ *
  * @author hui
  * @since 2023-12-09 11:57:29
  */

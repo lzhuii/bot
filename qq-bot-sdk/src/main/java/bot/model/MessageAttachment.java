@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 附件
+ *
  * @author hui
  * @since 2023-12-09 11:55:23
  */
