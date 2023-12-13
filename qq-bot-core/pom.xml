@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>top.lzhui</groupId>
+    <groupId>com.github.lzhuii</groupId>
     <artifactId>qq-bot-core</artifactId>
     <version>0.0.1</version>
 
@@ -24,7 +24,7 @@
     <dependencies>
         <!-- QQ机器人 SDK -->
         <dependency>
-            <groupId>top.lzhui</groupId>
+            <groupId>com.github.lzhuii</groupId>
             <artifactId>qq-bot-sdk</artifactId>
             <version>0.0.1</version>
         </dependency>

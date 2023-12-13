@@ -8,7 +8,7 @@
         <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>top.lzhui</groupId>
+    <groupId>com.github.lzhuii</groupId>
     <artifactId>qq-bot-plugin-qwen</artifactId>
     <version>0.0.1</version>
     <name>qq-bot-plugin-qwen</name>
@@ -18,7 +18,7 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>top.lzhui</groupId>
+            <groupId>com.github.lzhuii</groupId>
             <artifactId>qq-bot-sdk</artifactId>
             <version>0.0.1</version>
             <scope>provided</scope>
