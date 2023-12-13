@@ -7,8 +7,6 @@ import bot.sdk.model.Payload;
 import bot.sdk.plugin.MessageCreateEvent;
 import bot.sdk.util.JsonUtil;
 import jakarta.annotation.Resource;
-import lombok.Getter;
-import lombok.Setter;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.slf4j.Logger;
@@ -26,27 +24,30 @@ import java.util.TreeMap;
  * @author hui
  * @since 2023-12-10 00:04:17
  */
-@Getter
-@Setter
 public class BotWebSocketClient extends WebSocketClient {
 	private final Logger log = LoggerFactory.getLogger(WebSocketClient.class);
-	
 	/**
-	 * 会话ID
+	 * 掉线重试次数
+	 */
+	private Integer retry = 3;
+	/**
+	 * 会话 ID
 	 */
 	private String sessionId;
 	/**
 	 * 消息序号
 	 */
 	private Integer seq;
-	private final String token;
+	/**
+	 * 机器人 token
+	 */
+	private final String token = "Bot " + System.getenv("BOT_APPID") + "." + System.getenv("BOT_TOKEN");
 	
 	@Resource
 	private ApplicationEventPublisher publisher;
 	
-	public BotWebSocketClient(URI serverUri, String token) {
+	public BotWebSocketClient(URI serverUri) {
 		super(serverUri);
-		this.token = token;
 	}
 	
 	@Override
@@ -56,25 +57,41 @@ public class BotWebSocketClient extends WebSocketClient {
 	public void onMessage(String message) {
 		log.info(message);
 		Payload payload = JsonUtil.str2obj(message, Payload.class);
-		switch (payload.getOp()) {
-			case Opcode.HELLO -> hello();
-			case Opcode.DISPATCH -> dispatch(payload);
-			case Opcode.IDENTIFY -> log.info("identify");
-			case Opcode.RESUME -> log.info("resume");
-			case Opcode.RECONNECT -> log.info("reconnect");
-			case Opcode.INVALID_SESSION -> log.info("invalid session");
-			case Opcode.HEARTBEAT -> log.info("heartbeat");
-			case Opcode.HEARTBEAT_ACK -> log.info("heartbeat ack");
-			case Opcode.HTTP_CALLBACK_ACK -> log.info("http callback ack");
+		Opcode opcode = Opcode.valueOf(payload.getOp());
+		switch (opcode) {
+			case HELLO -> hello();
+			case DISPATCH -> dispatch(payload);
+			case IDENTIFY -> log.info("identify");
+			case RESUME -> log.info("resume");
+			case RECONNECT -> resume();
+			case INVALID_SESSION -> log.info("invalid session");
+			case HEARTBEAT -> log.info("heartbeat");
+			case HEARTBEAT_ACK -> log.info("heartbeat ack");
+			case HTTP_CALLBACK_ACK -> log.info("http callback ack");
 			default -> log.info("unknown opcode");
 		}
 	}
 	
 	@Override
-	public void onClose(int i, String s, boolean b) {}
+	public void onClose(int i, String s, boolean b) {
+		if (retry > 0) {
+			new Thread(() -> {
+				try {
+					reconnectBlocking();
+					retry = 3;
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}).start();
+		} else {
+			retry--;
+		}
+	}
 	
 	@Override
-	public void onError(Exception e) {}
+	public void onError(Exception e) {
+		log.info(e.getMessage());
+	}
 	
 	@Override
 	public void send(String text) {
@@ -89,7 +106,7 @@ public class BotWebSocketClient extends WebSocketClient {
 	private void heartbeat() {
 		if (isOpen() && sessionId != null) {
 			Map<String, Object> data = new TreeMap<>() {{
-				put("op", Opcode.HEARTBEAT);
+				put("op", Opcode.HEARTBEAT.getValue());
 				put("d", seq);
 			}};
 			send(JsonUtil.obj2str(data));
@@ -97,7 +114,7 @@ public class BotWebSocketClient extends WebSocketClient {
 	}
 	
 	private void hello() {
-		if (getSessionId() == null) {
+		if (sessionId == null) {
 			identify();
 		} else {
 			resume();
@@ -109,9 +126,9 @@ public class BotWebSocketClient extends WebSocketClient {
 	 */
 	private void identify() {
 		Map<String, Object> data = new TreeMap<>() {{
-			put("op", Opcode.IDENTIFY);
+			put("op", Opcode.IDENTIFY.getValue());
 			put("d", new TreeMap<>() {{
-				put("token", getToken());
+				put("token", token);
 				put("intents", Intent.GUILD_MESSAGES);
 				put("shard", new int[]{0, 1});
 			}});
@@ -124,11 +141,11 @@ public class BotWebSocketClient extends WebSocketClient {
 	 */
 	private void resume() {
 		Map<String, Object> data = new TreeMap<>() {{
-			put("op", Opcode.RESUME);
+			put("op", Opcode.RESUME.getValue());
 			put("d", new TreeMap<>() {{
-				put("token", getToken());
-				put("session_id", getSessionId());
-				put("seq", getSeq());
+				put("token", token);
+				put("session_id", sessionId);
+				put("seq", seq);
 			}});
 		}};
 		send(JsonUtil.obj2str(data));
@@ -136,8 +153,7 @@ public class BotWebSocketClient extends WebSocketClient {
 	
 	private void dispatch(Payload payload) {
 		//消息序号
-		Integer seq = payload.getS();
-		setSeq(seq);
+		seq = payload.getS();
 		switch (payload.getT()) {
 			case Intent.READY -> ready(payload);
 			case Intent.MESSAGE_CREATE -> messageCreate(payload);
@@ -145,8 +161,7 @@ public class BotWebSocketClient extends WebSocketClient {
 	}
 	
 	private void ready(Payload payload) {
-		String sessionId = payload.getD().get("session_id").asText();
-		setSessionId(sessionId);
+		sessionId = payload.getD().get("session_id").asText();
 	}
 	
 	private void messageCreate(Payload payload) {

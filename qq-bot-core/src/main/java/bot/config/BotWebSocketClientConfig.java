@@ -18,15 +18,10 @@ import java.net.URI;
 public class BotWebSocketClientConfig {
 	@Bean
 	public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
-		String appid = System.getenv("BOT_APPID");
-		String token = System.getenv("BOT_TOKEN");
-		String authorization = "Bot " + appid + "." + token;
-		
 		Gateway gateway = channelApi.gateway();
 		URI uri = URI.create(gateway.getUrl());
-		BotWebSocketClient client = new BotWebSocketClient(uri, authorization);
+		BotWebSocketClient client = new BotWebSocketClient(uri);
 		client.connectBlocking();
-		
 		return client;
 	}
 }

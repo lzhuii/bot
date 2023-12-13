@@ -6,17 +6,37 @@ package bot.sdk.constant;
  * @author hui
  * @since 2023-12-10 00:02:38
  */
-public class PrivateType {
+public enum PrivateType {
 	/**
 	 * 公开频道
 	 */
-	public static final int PUBLIC = 0;
+	PUBLIC(0),
 	/**
 	 * 群主管理员可见
 	 */
-	public static final int ADMIN = 1;
+	ADMIN(1),
 	/**
 	 * 群主管理员+指定成员
 	 */
-	public static final int ADMIN_AND_MEMBERS = 2;
+	ADMIN_AND_MEMBERS(2),
+	UNKNOWN(-1);
+	
+	private final int value;
+	
+	private PrivateType(int value) {
+		this.value = value;
+	}
+	
+	public int getValue() {
+		return value;
+	}
+	
+	public static PrivateType valueOf(int value) {
+		for (PrivateType privateType : PrivateType.values()) {
+			if (privateType.getValue() == value) {
+				return privateType;
+			}
+		}
+		return UNKNOWN;
+	}
 }
