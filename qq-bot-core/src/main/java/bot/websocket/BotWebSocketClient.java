@@ -1,10 +1,11 @@
 package bot.websocket;
 
-import bot.constant.Intent;
-import bot.constant.Opcode;
-import bot.model.Payload;
-import bot.plugin.DispatchEvent;
-import bot.util.JsonUtil;
+import bot.sdk.constant.Intent;
+import bot.sdk.constant.Opcode;
+import bot.sdk.model.ChannelMessage;
+import bot.sdk.model.Payload;
+import bot.sdk.plugin.MessageCreateEvent;
+import bot.sdk.util.JsonUtil;
 import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.Setter;
@@ -134,7 +135,23 @@ public class BotWebSocketClient extends WebSocketClient {
 	}
 	
 	private void dispatch(Payload payload) {
-		publisher.publishEvent(new DispatchEvent(this, payload));
+		//消息序号
+		Integer seq = payload.getS();
+		setSeq(seq);
+		switch (payload.getT()) {
+			case Intent.READY -> ready(payload);
+			case Intent.MESSAGE_CREATE -> messageCreate(payload);
+		}
+	}
+	
+	private void ready(Payload payload) {
+		String sessionId = payload.getD().get("session_id").asText();
+		setSessionId(sessionId);
+	}
+	
+	private void messageCreate(Payload payload) {
+		ChannelMessage message = JsonUtil.str2obj(payload.getD().toString(), ChannelMessage.class);
+		publisher.publishEvent(new MessageCreateEvent(this, message));
 	}
 	
 }

@@ -1,7 +1,7 @@
 package bot.config;
 
-import bot.api.ChannelApi;
-import bot.model.Gateway;
+import bot.sdk.api.ChannelApi;
+import bot.sdk.model.Gateway;
 import bot.websocket.BotWebSocketClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
