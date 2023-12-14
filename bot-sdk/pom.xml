@@ -10,29 +10,22 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.github.lzhuii</groupId>
-    <artifactId>qq-bot-core</artifactId>
+    <groupId>top.lzhui</groupId>
+    <artifactId>bot-sdk</artifactId>
     <version>0.0.1</version>
 
-    <name>qq-bot-core</name>
-    <description>qq-bot-core</description>
+    <name>bot-sdk</name>
+    <description>bot-sdk</description>
 
     <properties>
         <java.version>21</java.version>
     </properties>
 
     <dependencies>
-        <!-- QQ机器人 SDK -->
+        <!-- web -->
         <dependency>
-            <groupId>com.github.lzhuii</groupId>
-            <artifactId>qq-bot-sdk</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <!-- websocket -->
-        <dependency>
-            <groupId>org.java-websocket</groupId>
-            <artifactId>Java-WebSocket</artifactId>
-            <version>1.5.4</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
         <!-- devtools -->
         <dependency>
@@ -54,25 +47,22 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <layout>ZIP</layout>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <distributionManagement>
+        <repository>
+            <id>gitea</id>
+            <url>https://git.lzhui.top/api/packages/hui/maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>gitea</id>
+            <url>https://git.lzhui.top/api/packages/hui/maven</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

@@ -2,9 +2,9 @@
 
 ## 简介
 
-- `qq-bot-sdk` 实现 QQ 机器人 OpenAPI
-- `qq-bot-core` 实现机器人 WebSocket，以及机器人核心功能
-- `qq-bot-plugin-qwen` 实现通义千问插件
+- `bot-sdk` 实现 QQ 机器人 OpenAPI
+- `bot-core` 实现机器人 WebSocket，以及机器人核心功能
+- `bot-plugin-qwen` 实现通义千问插件
 
 ## 技术选型
 
@@ -17,20 +17,20 @@
 1. 注册 [QQ 机器人](https://q.qq.com/#/)，获取 `AppID` 和 `Token`，添加环境变量 `BOT_APPID` 和 `BOT_TOKEN`
 2. 注册[阿里云模型服务灵积](https://dashscope.aliyun.com/)，获取API-Key，添加环境变量 `DASHSCOPE_API_KEY`
 3. 克隆项目到本地并导入 IDEA
-4. `qq-bot-sdk` 执行 `mvn install` 将依赖安装到本地仓库
-5. `qq-bot-core` 和 `qq-bot-plugin-qwen` 执行 `mvn package` 打包
+4. `bot-sdk` 执行 `mvn install` 将依赖安装到本地仓库
+5. `bot-core` 和 `bot-plugin-qwen` 执行 `mvn package` 打包
 6. 将编译产物按下面的目录结构部署
 ```bash
 .
 ├── application.yml
-├── qq-bot-core-0.0.1.jar
+├── bot-core-0.0.1.jar
 ├── plugin/
-│   └── qq-bot-plugin-qwen-0.0.1-jar-with-dependencies.jar
+│   └── bot-plugin-qwen-0.0.1-jar-with-dependencies.jar
 ```
 
 7. 启动机器人
 ```bash
-java -Dloader.path=./plugin -jar ./qq-bot-core-1.0.0.jar
+java -Dloader.path=./plugin -jar ./bot-core-1.0.0.jar
 ```
 
 ## SDK 已实现 QQ 频道 API 接口列表
