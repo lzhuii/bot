@@ -16,7 +16,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 import java.net.URI;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * WebSocket 客户端
@@ -61,14 +60,14 @@ public class BotWebSocketClient extends WebSocketClient {
 		switch (opcode) {
 			case HELLO -> hello();
 			case DISPATCH -> dispatch(payload);
-			case IDENTIFY -> log.info("identify");
-			case RESUME -> log.info("resume");
+			case IDENTIFY -> log.info("IDENTIFY");
+			case RESUME -> log.info("RESUME");
 			case RECONNECT -> resume();
-			case INVALID_SESSION -> log.info("invalid session");
-			case HEARTBEAT -> log.info("heartbeat");
-			case HEARTBEAT_ACK -> log.info("heartbeat ack");
-			case HTTP_CALLBACK_ACK -> log.info("http callback ack");
-			default -> log.info("unknown opcode");
+			case INVALID_SESSION -> log.info("INVALID_SESSION");
+			case HEARTBEAT -> log.info("HEARTBEAT");
+			case HEARTBEAT_ACK -> log.info("HEARTBEAT_ACK");
+			case HTTP_CALLBACK_ACK -> log.info("HTTP_CALLBACK_ACK");
+			default -> log.info("UNKNOWN OPCODE");
 		}
 	}
 	
@@ -105,10 +104,10 @@ public class BotWebSocketClient extends WebSocketClient {
 	@Scheduled(fixedRate = 40 * 1000)
 	private void heartbeat() {
 		if (isOpen() && sessionId != null) {
-			Map<String, Object> data = new TreeMap<>() {{
-				put("op", Opcode.HEARTBEAT.getValue());
-				put("d", seq);
-			}};
+			Map<String, Object> data = Map.of(
+					"op", Opcode.HEARTBEAT.getValue(),
+					"d", seq
+			);
 			send(JsonUtil.obj2str(data));
 		}
 	}
@@ -125,14 +124,13 @@ public class BotWebSocketClient extends WebSocketClient {
 	 * 鉴权
 	 */
 	private void identify() {
-		Map<String, Object> data = new TreeMap<>() {{
-			put("op", Opcode.IDENTIFY.getValue());
-			put("d", new TreeMap<>() {{
-				put("token", token);
-				put("intents", Intent.GUILD_MESSAGES);
-				put("shard", new int[]{0, 1});
-			}});
-		}};
+		Map<String, Object> data = Map.of(
+				"op", Opcode.IDENTIFY.getValue(),
+				"d", Map.of(
+						"token", token,
+						"intents", Intent.GUILD_MESSAGES,
+						"shard", new int[]{0, 1})
+		);
 		send(JsonUtil.obj2str(data));
 	}
 	
@@ -140,14 +138,14 @@ public class BotWebSocketClient extends WebSocketClient {
 	 * 重连
 	 */
 	private void resume() {
-		Map<String, Object> data = new TreeMap<>() {{
-			put("op", Opcode.RESUME.getValue());
-			put("d", new TreeMap<>() {{
-				put("token", token);
-				put("session_id", sessionId);
-				put("seq", seq);
-			}});
-		}};
+		Map<String, Object> data = Map.of(
+				"op", Opcode.RESUME.getValue(),
+				"d", Map.of(
+						"token", token,
+						"session_id", sessionId,
+						"seq", seq
+				)
+		);
 		send(JsonUtil.obj2str(data));
 	}
 	

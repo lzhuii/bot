@@ -91,4 +91,8 @@ public class ChannelMessage {
 	 */
 	@JsonProperty("src_guild_id")
 	private String srcGuildId;
+	/**
+	 * 指令
+	 */
+	private String command;
 }
