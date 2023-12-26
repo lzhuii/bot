@@ -4,4 +4,4 @@ logging:
   charset:
     file: UTF-8
   file:
-    name: ./bot-core.log
+    name: ./log/bot-core.log
