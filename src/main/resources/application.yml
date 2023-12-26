@@ -1,0 +1,10 @@
+bot:
+  baseUrl: https://sandbox.api.sgroup.qq.com
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss
+  charset:
+    file: UTF-8
+  file:
+    path: ./log
+    name: bot-core
