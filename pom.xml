@@ -33,6 +33,18 @@
             <artifactId>Java-WebSocket</artifactId>
             <version>1.5.4</version>
         </dependency>
+        <!-- dashscope -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dashscope-sdk-java</artifactId>
+            <version>2.9.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- devtools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -6,5 +6,4 @@ logging:
   charset:
     file: UTF-8
   file:
-    path: ./log
-    name: bot-core
+    name: ./bot-core.log

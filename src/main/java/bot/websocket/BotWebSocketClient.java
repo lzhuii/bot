@@ -24,10 +24,8 @@ import java.util.Map;
  */
 public class BotWebSocketClient extends WebSocketClient {
 	private final Logger log = LoggerFactory.getLogger(WebSocketClient.class);
-	/**
-	 * 掉线重试次数
-	 */
-	private Integer retry = 3;
+	@Resource
+	private BotWebSocketHandler botWebSocketHandler;
 	/**
 	 * 会话 ID
 	 */
@@ -71,20 +69,7 @@ public class BotWebSocketClient extends WebSocketClient {
 	}
 	
 	@Override
-	public void onClose(int i, String s, boolean b) {
-		if (retry > 0) {
-			new Thread(() -> {
-				try {
-					reconnectBlocking();
-					retry = 3;
-				} catch (InterruptedException e) {
-					throw new RuntimeException(e);
-				}
-			}).start();
-		} else {
-			retry--;
-		}
-	}
+	public void onClose(int i, String s, boolean b) {}
 	
 	@Override
 	public void onError(Exception e) {
@@ -153,7 +138,7 @@ public class BotWebSocketClient extends WebSocketClient {
 		seq = payload.getS();
 		switch (payload.getT()) {
 			case Intent.READY -> ready(payload);
-			case Intent.MESSAGE_CREATE -> messageCreate(payload);
+			case Intent.MESSAGE_CREATE -> botWebSocketHandler.messageCreate(payload);
 		}
 	}
 	
