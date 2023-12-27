@@ -1,7 +1,10 @@
-bot:
-  baseUrl: https://sandbox.api.sgroup.qq.com
+server:
+  port: 10001
 logging:
   charset:
     file: UTF-8
   file:
     name: ./log/bot-core.log
+
+bot:
+  baseUrl: https://sandbox.api.sgroup.qq.com

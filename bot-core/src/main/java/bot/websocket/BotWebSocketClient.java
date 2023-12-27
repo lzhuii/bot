@@ -25,6 +25,10 @@ import java.util.Map;
  */
 public class BotWebSocketClient extends WebSocketClient {
 	private final Logger log = LoggerFactory.getLogger(WebSocketClient.class);
+	/**
+	 * 机器人 token
+	 */
+	private final String token = "Bot " + System.getenv("BOT_APPID") + "." + System.getenv("BOT_TOKEN");
 	@Resource
 	private BotWebSocketHandler botWebSocketHandler;
 	/**
@@ -36,9 +40,9 @@ public class BotWebSocketClient extends WebSocketClient {
 	 */
 	private Integer seq;
 	/**
-	 * 机器人 token
+	 * 重连次数
 	 */
-	private final String token = "Bot " + System.getenv("BOT_APPID") + "." + System.getenv("BOT_TOKEN");
+	private Integer reconnectTime = 3;
 	
 	@Resource
 	private ApplicationEventPublisher publisher;
@@ -70,7 +74,20 @@ public class BotWebSocketClient extends WebSocketClient {
 	}
 	
 	@Override
-	public void onClose(int i, String s, boolean b) {}
+	public void onClose(int i, String s, boolean b) {
+		log.info("WebSocket异常关闭");
+		if (reconnectTime > 0) {
+			reconnectTime--;
+			log.info("尝试重连");
+			new Thread(() -> {
+				try {
+					reconnectBlocking();
+				} catch (InterruptedException e) {
+					throw new RuntimeException(e);
+				}
+			}).start();
+		}
+	}
 	
 	@Override
 	public void onError(Exception e) {
