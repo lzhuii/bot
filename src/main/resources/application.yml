@@ -3,6 +3,8 @@ server:
 logging:
   charset:
     file: UTF-8
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss
   file:
     name: ./log/bot-core.log
 

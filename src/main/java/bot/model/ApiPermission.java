@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 接口权限
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-12 12:58:17
  */
-@Getter
-@Setter
 public class ApiPermission {
 	/**
 	 * API 接口名，例如 /guilds/{guild_id}/members/{user_id}
@@ -30,4 +26,36 @@ public class ApiPermission {
 	 */
 	@JsonProperty("auth_status")
 	private Integer authStatus;
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public Integer getAuthStatus() {
+		return authStatus;
+	}
+
+	public void setAuthStatus(Integer authStatus) {
+		this.authStatus = authStatus;
+	}
 }

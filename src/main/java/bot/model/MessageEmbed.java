@@ -1,7 +1,5 @@
 package bot.model;
 
-import lombok.*;
-
 import java.util.List;
 
 /**
@@ -10,51 +8,53 @@ import java.util.List;
  * @author hui
  * @since 2023-12-09 11:55:23
  */
-@Getter
-@Setter
 public class MessageEmbed {
-	/**
-	 * 标题
-	 */
-	private String title;
-	/**
-	 * 消息弹窗内容
-	 */
-	private String prompt;
-	/**
-	 * 缩略图
-	 */
-	private MessageEmbedThumbnail thumbnail;
-	/**
-	 * embed 字段数据
-	 */
-	private List<MessageEmbedField> fields;
-	
-	/**
-	 * QQ频道 缩略图
-	 */
-	@Getter
-	@Setter
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class MessageEmbedThumbnail {
-		/**
-		 * 图片地址
-		 */
-		private String url;
-	}
-	
-	/**
-	 * QQ频道 embed字段数据
-	 */
-	@Getter
-	@Setter
-	@NoArgsConstructor
-	@AllArgsConstructor
-	public static class MessageEmbedField {
-		/**
-		 * 字段名
-		 */
-		private String name;
-	}
+    /**
+     * 标题
+     */
+    private String title;
+    /**
+     * 消息弹窗内容
+     */
+    private String prompt;
+    /**
+     * 缩略图
+     */
+    private MessageEmbedThumbnail thumbnail;
+    /**
+     * embed 字段数据
+     */
+    private List<MessageEmbedField> fields;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public void setPrompt(String prompt) {
+        this.prompt = prompt;
+    }
+
+    public MessageEmbedThumbnail getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(MessageEmbedThumbnail thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public List<MessageEmbedField> getFields() {
+        return fields;
+    }
+
+    public void setFields(List<MessageEmbedField> fields) {
+        this.fields = fields;
+    }
 }

@@ -5,8 +5,6 @@ import bot.model.MessageEmbed;
 import bot.model.MessageMarkdown;
 import bot.model.MessageReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 消息请求类型
@@ -14,8 +12,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 11:50:16
  */
-@Getter
-@Setter
 public class MessageRequest {
 	/**
 	 * 记录内容的对象
@@ -52,4 +48,68 @@ public class MessageRequest {
 	 * 记录消息的Markdown对象
 	 */
 	private MessageMarkdown markdown;
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public MessageEmbed getEmbed() {
+		return embed;
+	}
+
+	public void setEmbed(MessageEmbed embed) {
+		this.embed = embed;
+	}
+
+	public MessageArk getArk() {
+		return ark;
+	}
+
+	public void setArk(MessageArk ark) {
+		this.ark = ark;
+	}
+
+	public MessageReference getMessageReference() {
+		return messageReference;
+	}
+
+	public void setMessageReference(MessageReference messageReference) {
+		this.messageReference = messageReference;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(String msgId) {
+		this.msgId = msgId;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
+	public MessageMarkdown getMarkdown() {
+		return markdown;
+	}
+
+	public void setMarkdown(MessageMarkdown markdown) {
+		this.markdown = markdown;
+	}
 }

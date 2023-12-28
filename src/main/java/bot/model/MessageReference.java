@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * QQ频道 引用消息对象
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 11:55:23
  */
-@Getter
-@Setter
 public class MessageReference {
 	/**
 	 * 需要引用回复的消息 id
@@ -23,4 +19,20 @@ public class MessageReference {
 	 */
 	@JsonProperty("ignore_get_message_error")
 	private Boolean ignoreGetMessageError;
+
+	public String getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
+	}
+
+	public Boolean getIgnoreGetMessageError() {
+		return ignoreGetMessageError;
+	}
+
+	public void setIgnoreGetMessageError(Boolean ignoreGetMessageError) {
+		this.ignoreGetMessageError = ignoreGetMessageError;
+	}
 }

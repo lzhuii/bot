@@ -1,27 +1,12 @@
 # QQ机器人
 
-## 简介
-
-- `bot-sdk` 实现 QQ 机器人 OpenAPI
-- `bot-core` 实现机器人 WebSocket，以及机器人核心功能
-- `bot-plugin-qwen` 实现通义千问插件
-
 ## 技术选型
 
 1. Java 21
 2. Spring Boot 3.2.0
 3. Java-WebSocket 1.5.4
 
-## 使用方式
-
-1. 注册 [QQ 机器人](https://q.qq.com/#/)，获取 `AppID` 和 `Token`，添加环境变量 `BOT_APPID` 和 `BOT_TOKEN`
-2. 注册[阿里云模型服务灵积](https://dashscope.aliyun.com/)，获取API-Key，添加环境变量 `DASHSCOPE_API_KEY`
-3. 下载 `release` 中的安装包
-4. 创建运行目录 `sudo mkdir -p /app`
-5. 解压 `sudo tar xvf bot.tar.gz -C /app`
-6. 启动 `sudo sh /app/bot/start.sh`
-
-## SDK 已实现 QQ 频道 API 接口列表
+## 已实现 QQ 频道 API 接口列表
 
 - 获取通用 WSS 接入点
 - 发送消息

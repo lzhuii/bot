@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 频道成员
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 09:07:47
  */
-@Getter
-@Setter
 public class Member {
 	/**
 	 * 频道 ID
@@ -35,4 +31,44 @@ public class Member {
 	 */
 	@JsonProperty("joined_at")
 	private String joinedAt;
+
+	public String getGuildId() {
+		return guildId;
+	}
+
+	public void setGuildId(String guildId) {
+		this.guildId = guildId;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	public String[] getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String[] roles) {
+		this.roles = roles;
+	}
+
+	public String getJoinedAt() {
+		return joinedAt;
+	}
+
+	public void setJoinedAt(String joinedAt) {
+		this.joinedAt = joinedAt;
+	}
 }

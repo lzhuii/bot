@@ -10,10 +10,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author hui
  * @since 2023-12-10 00:04:17
  */
-@EnableScheduling
 @SpringBootApplication
-public class BotCoreApp {
-	public static void main(String[] args) {
-		SpringApplication.run(BotCoreApp.class, args);
-	}
+@EnableScheduling
+public class BotApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BotApplication.class, args);
+    }
 }

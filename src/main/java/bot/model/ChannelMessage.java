@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,8 +11,6 @@ import java.util.List;
  * @author hui
  * @since 2023-12-09 11:53:16
  */
-@Getter
-@Setter
 public class ChannelMessage {
 	/**
 	 * 消息id
@@ -95,4 +91,148 @@ public class ChannelMessage {
 	 * 指令
 	 */
 	private String command;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
+	}
+
+	public String getGuildId() {
+		return guildId;
+	}
+
+	public void setGuildId(String guildId) {
+		this.guildId = guildId;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Timestamp getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Timestamp timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public Timestamp getEditedTimestamp() {
+		return editedTimestamp;
+	}
+
+	public void setEditedTimestamp(Timestamp editedTimestamp) {
+		this.editedTimestamp = editedTimestamp;
+	}
+
+	public boolean isMentionEveryone() {
+		return mentionEveryone;
+	}
+
+	public void setMentionEveryone(boolean mentionEveryone) {
+		this.mentionEveryone = mentionEveryone;
+	}
+
+	public User getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public List<MessageAttachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<MessageAttachment> attachments) {
+		this.attachments = attachments;
+	}
+
+	public List<MessageEmbed> getEmbeds() {
+		return embeds;
+	}
+
+	public void setEmbeds(List<MessageEmbed> embeds) {
+		this.embeds = embeds;
+	}
+
+	public List<User> getMentions() {
+		return mentions;
+	}
+
+	public void setMentions(List<User> mentions) {
+		this.mentions = mentions;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+	public MessageArk getArk() {
+		return ark;
+	}
+
+	public void setArk(MessageArk ark) {
+		this.ark = ark;
+	}
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
+
+	public String getSeqInChannel() {
+		return seqInChannel;
+	}
+
+	public void setSeqInChannel(String seqInChannel) {
+		this.seqInChannel = seqInChannel;
+	}
+
+	public MessageReference getMessageReference() {
+		return messageReference;
+	}
+
+	public void setMessageReference(MessageReference messageReference) {
+		this.messageReference = messageReference;
+	}
+
+	public String getSrcGuildId() {
+		return srcGuildId;
+	}
+
+	public void setSrcGuildId(String srcGuildId) {
+		this.srcGuildId = srcGuildId;
+	}
+
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
 }

@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 子频道
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 09:07:47
  */
-@Getter
-@Setter
 public class Channel {
 	/**
 	 * 子频道 ID
@@ -68,4 +64,100 @@ public class Channel {
 	 * 用户拥有的子频道权限 Permissions
 	 */
 	private String permissions;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getGuildId() {
+		return guildId;
+	}
+
+	public void setGuildId(String guildId) {
+		this.guildId = guildId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getSubType() {
+		return subType;
+	}
+
+	public void setSubType(Integer subType) {
+		this.subType = subType;
+	}
+
+	public Integer getPosition() {
+		return position;
+	}
+
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(String ownerId) {
+		this.ownerId = ownerId;
+	}
+
+	public Integer getPrivateType() {
+		return privateType;
+	}
+
+	public void setPrivateType(Integer privateType) {
+		this.privateType = privateType;
+	}
+
+	public Integer getSpeakPermission() {
+		return speakPermission;
+	}
+
+	public void setSpeakPermission(Integer speakPermission) {
+		this.speakPermission = speakPermission;
+	}
+
+	public String getApplicationId() {
+		return applicationId;
+	}
+
+	public void setApplicationId(String applicationId) {
+		this.applicationId = applicationId;
+	}
+
+	public String getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(String permissions) {
+		this.permissions = permissions;
+	}
 }

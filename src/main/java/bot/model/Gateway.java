@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * WebSocket 网关
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 11:57:19
  */
-@Getter
-@Setter
 public class Gateway {
 	/**
 	 * 用于连接 websocket 的地址
@@ -26,4 +22,28 @@ public class Gateway {
 	 */
 	@JsonProperty("session_start_limit")
 	private SessionStartLimit sessionStartLimit;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getShards() {
+		return shards;
+	}
+
+	public void setShards(Integer shards) {
+		this.shards = shards;
+	}
+
+	public SessionStartLimit getSessionStartLimit() {
+		return sessionStartLimit;
+	}
+
+	public void setSessionStartLimit(SessionStartLimit sessionStartLimit) {
+		this.sessionStartLimit = sessionStartLimit;
+	}
 }

@@ -2,8 +2,6 @@ package bot.model.response;
 
 import bot.model.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -13,8 +11,6 @@ import java.util.List;
  * @author hui
  * @since 2023-12-09 09:07:47
  */
-@Getter
-@Setter
 public class RoleResponse {
 	/**
 	 * 频道 ID
@@ -30,4 +26,28 @@ public class RoleResponse {
 	 */
 	@JsonProperty("role_num_limit")
 	private String roleNumLimit;
+
+	public String getGuildId() {
+		return guildId;
+	}
+
+	public void setGuildId(String guildId) {
+		this.guildId = guildId;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getRoleNumLimit() {
+		return roleNumLimit;
+	}
+
+	public void setRoleNumLimit(String roleNumLimit) {
+		this.roleNumLimit = roleNumLimit;
+	}
 }

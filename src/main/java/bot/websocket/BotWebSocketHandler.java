@@ -16,29 +16,28 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class BotWebSocketHandler {
-	@Resource
-	private ChannelApi channelApi;
-	@Resource
-	private DashScopeService dashScopeService;
-	
-	public void messageCreate(Payload payload) {
-		ChannelMessage message = JsonUtil.str2obj(payload.getD().toString(), ChannelMessage.class);
-		if (message.getMentions() != null) {
-			for (User mention : message.getMentions()) {
-				// 是否@机器人消息
-				if (mention.getBot()) {
-					String channelId = message.getChannelId();
-					String msgId = message.getId();
-					String content = message.getContent().replace("<@!" + mention.getId() + "> ", "");
-					String result = dashScopeService.chat(content);
-					MessageRequest messageRequest = new MessageRequest();
-					messageRequest.setMsgId(msgId);
-					messageRequest.setContent(result);
-					channelApi.sendMessage(channelId, messageRequest);
-					break;
-				}
-			}
-		}
-	}
-	
+    @Resource
+    private ChannelApi channelApi;
+    @Resource
+    private DashScopeService dashScopeService;
+
+    public void messageCreate(Payload payload) {
+        ChannelMessage message = JsonUtil.str2obj(payload.getD().toString(), ChannelMessage.class);
+        if (message.getMentions() != null) {
+            for (User mention : message.getMentions()) {
+                // 是否@机器人消息
+                if (mention.getBot()) {
+                    String channelId = message.getChannelId();
+                    String msgId = message.getId();
+                    String content = message.getContent().replace("<@!" + mention.getId() + "> ", "");
+                    String result = dashScopeService.chat(content);
+                    MessageRequest messageRequest = new MessageRequest();
+                    messageRequest.setMsgId(msgId);
+                    messageRequest.setContent(result);
+                    channelApi.sendMessage(channelId, messageRequest);
+                    break;
+                }
+            }
+        }
+    }
 }

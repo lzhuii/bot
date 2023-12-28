@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -12,8 +10,6 @@ import java.util.List;
  * @author hui
  * @since 2023-12-09 11:55:23
  */
-@Getter
-@Setter
 public class MessageArk {
 	/**
 	 * ark模板id（需要先申请）
@@ -24,53 +20,20 @@ public class MessageArk {
 	 * kv值列表
 	 */
 	private List<MessageAkKv> kv;
-	
-	/**
-	 * QQ频道 kv值列表
-	 */
-	@Getter
-	@Setter
-	public static class MessageAkKv {
-		/**
-		 * key
-		 */
-		private String key;
-		/**
-		 * value
-		 */
-		private String value;
-		/**
-		 * ark obj类型的列表
-		 */
-		private List<MessageArkObj> obj;
+
+	public Integer getTemplateId() {
+		return templateId;
 	}
-	
-	/**
-	 * QQ频道 ark obj类型的列表
-	 */
-	@Getter
-	@Setter
-	public static class MessageArkObj {
-		/**
-		 * ark objkv列表
-		 */
-		@JsonProperty("obj_kv")
-		private List<MessageArkObjKv> objKv;
+
+	public void setTemplateId(Integer templateId) {
+		this.templateId = templateId;
 	}
-	
-	/**
-	 * QQ频道 objkv
-	 */
-	@Getter
-	@Setter
-	public static class MessageArkObjKv {
-		/**
-		 * key
-		 */
-		private String key;
-		/**
-		 * value
-		 */
-		private String value;
+
+	public List<MessageAkKv> getKv() {
+		return kv;
+	}
+
+	public void setKv(List<MessageAkKv> kv) {
+		this.kv = kv;
 	}
 }

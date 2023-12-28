@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 接口权限需求对象
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-12 13:00:11
  */
-@Getter
-@Setter
 public class ApiPermissionDemand {
 	/**
 	 * 频道 ID
@@ -36,4 +32,44 @@ public class ApiPermissionDemand {
 	 * 接口权限链接中的机器人可使用功能的描述信息
 	 */
 	private String desc;
+
+	public String getGuildId() {
+		return guildId;
+	}
+
+	public void setGuildId(String guildId) {
+		this.guildId = guildId;
+	}
+
+	public String getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
+	}
+
+	public ApiPermissionDemandIdentify getApiIdentify() {
+		return apiIdentify;
+	}
+
+	public void setApiIdentify(ApiPermissionDemandIdentify apiIdentify) {
+		this.apiIdentify = apiIdentify;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 }

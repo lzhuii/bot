@@ -1,8 +1,6 @@
 package bot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 频道身份组
@@ -10,8 +8,6 @@ import lombok.Setter;
  * @author hui
  * @since 2023-12-09 11:38:22
  */
-@Getter
-@Setter
 public class Role {
 	/**
 	 * 身份组 ID
@@ -38,4 +34,52 @@ public class Role {
 	 */
 	@JsonProperty("member_limit")
 	private Integer memberLimit;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Long getColor() {
+		return color;
+	}
+
+	public void setColor(Long color) {
+		this.color = color;
+	}
+
+	public Integer getHoist() {
+		return hoist;
+	}
+
+	public void setHoist(Integer hoist) {
+		this.hoist = hoist;
+	}
+
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	public Integer getMemberLimit() {
+		return memberLimit;
+	}
+
+	public void setMemberLimit(Integer memberLimit) {
+		this.memberLimit = memberLimit;
+	}
 }

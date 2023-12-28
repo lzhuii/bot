@@ -1,15 +1,11 @@
 package bot.model;
 
-
 /**
- * 附件
- *
- * @author hui
- * @since 2023-12-09 11:55:23
+ * QQ频道 缩略图
  */
-public class MessageAttachment {
+public class MessageEmbedThumbnail {
     /**
-     * 下载地址
+     * 图片地址
      */
     private String url;
 
