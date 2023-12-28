@@ -34,10 +34,6 @@ public class BotWebSocketClient extends WebSocketClient {
      * 消息序号
      */
     private Integer seq;
-    /**
-     * 重连次数
-     */
-    private Integer reconnectTime = 3;
     @Resource
     private BotWebSocketHandler botWebSocketHandler;
 
@@ -60,7 +56,7 @@ public class BotWebSocketClient extends WebSocketClient {
             case DISPATCH -> dispatch(payload);
             case IDENTIFY -> log.info("IDENTIFY");
             case RESUME -> log.info("RESUME");
-            case RECONNECT -> resume();
+            case RECONNECT -> log.info("RECONNECT");
             case INVALID_SESSION -> log.info("INVALID_SESSION");
             case HEARTBEAT -> log.info("HEARTBEAT");
             case HEARTBEAT_ACK -> log.info("HEARTBEAT_ACK");
@@ -72,22 +68,24 @@ public class BotWebSocketClient extends WebSocketClient {
     @Override
     public void onClose(int i, String s, boolean b) {
         log.info("WebSocket连接已关闭");
-        if (reconnectTime > 0) {
-            reconnectTime--;
-            log.info("尝试重连");
-            new Thread(() -> {
-                try {
-                    reconnectBlocking();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            }).start();
-        }
+        new Thread(() -> {
+            try {
+                reconnectBlocking();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     @Override
     public void onError(Exception e) {
         e.printStackTrace();
+    }
+
+    @Override
+    public void send(String text) {
+        log.info(text);
+        super.send(text);
     }
 
     /**
