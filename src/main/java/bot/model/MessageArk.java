@@ -20,19 +20,19 @@ public class MessageArk {
 	 * kv值列表
 	 */
 	private List<MessageAkKv> kv;
-	
+
 	public Integer getTemplateId() {
 		return templateId;
 	}
-	
+
 	public void setTemplateId(Integer templateId) {
 		this.templateId = templateId;
 	}
-	
+
 	public List<MessageAkKv> getKv() {
 		return kv;
 	}
-	
+
 	public void setKv(List<MessageAkKv> kv) {
 		this.kv = kv;
 	}

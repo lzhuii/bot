@@ -31,43 +31,43 @@ public class Member {
 	 */
 	@JsonProperty("joined_at")
 	private String joinedAt;
-	
+
 	public String getGuildId() {
 		return guildId;
 	}
-	
+
 	public void setGuildId(String guildId) {
 		this.guildId = guildId;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String getNick() {
 		return nick;
 	}
-	
+
 	public void setNick(String nick) {
 		this.nick = nick;
 	}
-	
+
 	public String[] getRoles() {
 		return roles;
 	}
-	
+
 	public void setRoles(String[] roles) {
 		this.roles = roles;
 	}
-	
+
 	public String getJoinedAt() {
 		return joinedAt;
 	}
-	
+
 	public void setJoinedAt(String joinedAt) {
 		this.joinedAt = joinedAt;
 	}

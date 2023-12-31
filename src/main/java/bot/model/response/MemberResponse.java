@@ -19,19 +19,19 @@ public class MemberResponse {
 	 * 下一次请求的分页标识
 	 */
 	private String next;
-	
+
 	public List<Member> getData() {
 		return data;
 	}
-	
+
 	public void setData(List<Member> data) {
 		this.data = data;
 	}
-	
+
 	public String getNext() {
 		return next;
 	}
-	
+
 	public void setNext(String next) {
 		this.next = next;
 	}

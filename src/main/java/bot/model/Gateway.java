@@ -22,27 +22,27 @@ public class Gateway {
 	 */
 	@JsonProperty("session_start_limit")
 	private SessionStartLimit sessionStartLimit;
-	
+
 	public String getUrl() {
 		return url;
 	}
-	
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
+
 	public Integer getShards() {
 		return shards;
 	}
-	
+
 	public void setShards(Integer shards) {
 		this.shards = shards;
 	}
-	
+
 	public SessionStartLimit getSessionStartLimit() {
 		return sessionStartLimit;
 	}
-	
+
 	public void setSessionStartLimit(SessionStartLimit sessionStartLimit) {
 		this.sessionStartLimit = sessionStartLimit;
 	}

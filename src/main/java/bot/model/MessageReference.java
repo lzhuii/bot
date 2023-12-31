@@ -19,19 +19,19 @@ public class MessageReference {
 	 */
 	@JsonProperty("ignore_get_message_error")
 	private Boolean ignoreGetMessageError;
-	
+
 	public String getMessageId() {
 		return messageId;
 	}
-	
+
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
 	}
-	
+
 	public Boolean getIgnoreGetMessageError() {
 		return ignoreGetMessageError;
 	}
-	
+
 	public void setIgnoreGetMessageError(Boolean ignoreGetMessageError) {
 		this.ignoreGetMessageError = ignoreGetMessageError;
 	}

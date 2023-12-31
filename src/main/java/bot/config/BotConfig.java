@@ -20,37 +20,37 @@ import java.net.URI;
  */
 @Configuration
 public class BotConfig {
-	
-	@Value("${bot.baseUrl}")
-	private String baseUrl;
-	
-	@Bean
-	ChannelApi channelApi() {
-		String appid = System.getenv("BOT_APPID");
-		String token = System.getenv("BOT_TOKEN");
-		String authorization = "Bot " + appid + "." + token;
-		
-		WebClient client = WebClient
-				.builder()
-				.baseUrl(baseUrl)
-				.defaultHeader("Authorization", authorization)
-				.build();
-		
-		WebClientAdapter adapter = WebClientAdapter.create(client);
-		
-		HttpServiceProxyFactory factory = HttpServiceProxyFactory
-				.builder()
-				.exchangeAdapter(adapter)
-				.build();
-		return factory.createClient(ChannelApi.class);
-	}
-	
-	@Bean
-	public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
-		Gateway gateway = channelApi.gateway();
-		URI uri = URI.create(gateway.getUrl());
-		BotWebSocketClient client = new BotWebSocketClient(uri);
-		client.connectBlocking();
-		return client;
-	}
+
+    @Value("${bot.baseUrl}")
+    private String baseUrl;
+
+    @Bean
+    ChannelApi channelApi() {
+        String appid = System.getenv("BOT_APPID");
+        String token = System.getenv("BOT_TOKEN");
+        String authorization = "Bot " + appid + "." + token;
+
+        WebClient client = WebClient
+                .builder()
+                .baseUrl(baseUrl)
+                .defaultHeader("Authorization", authorization)
+                .build();
+
+        WebClientAdapter adapter = WebClientAdapter.create(client);
+
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+                .builder()
+                .exchangeAdapter(adapter)
+                .build();
+        return factory.createClient(ChannelApi.class);
+    }
+
+    @Bean
+    public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
+        Gateway gateway = channelApi.gateway();
+        URI uri = URI.create(gateway.getUrl());
+        BotWebSocketClient client = new BotWebSocketClient(uri);
+        client.connectBlocking();
+        return client;
+    }
 }

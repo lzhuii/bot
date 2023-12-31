@@ -1,9 +1,12 @@
-bot:
-  baseUrl: https://sandbox.api.sgroup.qq.com
+server:
+  port: 10001
 logging:
-  pattern:
-    dateformat: yyyy-MM-dd HH:mm:ss
   charset:
     file: UTF-8
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss
   file:
     name: ./log/bot-core.log
+
+bot:
+  baseUrl: https://sandbox.api.sgroup.qq.com

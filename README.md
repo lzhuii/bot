@@ -6,6 +6,15 @@
 2. Spring Boot 3.2.0
 3. Java-WebSocket 1.5.4
 
+## 使用方法
+
+1. clone 项目到本地，导入 IDEA
+2. 配置环境变量
+    - `BOT_APPID` QQ机器人AppID
+    - `BOT_TOKEN` QQ机器人token
+    - `DASHSCOPE_API_KEY` 阿里云模型服务灵积key
+3. 启动项目
+
 ## 已实现 QQ 频道 API 接口列表
 
 - 获取通用 WSS 接入点

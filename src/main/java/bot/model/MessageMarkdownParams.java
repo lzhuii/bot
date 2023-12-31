@@ -1,6 +1,6 @@
 package bot.model;
 
-public class MessageArkObjKv {
+public class MessageMarkdownParams {
     private String key;
     private String value;
 

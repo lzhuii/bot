@@ -1,5 +1,6 @@
 package bot.model;
 
+
 /**
  * 接口权限需求标识对象
  *
@@ -15,19 +16,19 @@ public class ApiPermissionDemandIdentify {
 	 * 请求方法，例如 GET
 	 */
 	private String method;
-	
+
 	public String getPath() {
 		return path;
 	}
-	
+
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	public String getMethod() {
 		return method;
 	}
-	
+
 	public void setMethod(String method) {
 		this.method = method;
 	}

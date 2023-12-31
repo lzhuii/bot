@@ -26,27 +26,27 @@ public class RoleResponse {
 	 */
 	@JsonProperty("role_num_limit")
 	private String roleNumLimit;
-	
+
 	public String getGuildId() {
 		return guildId;
 	}
-	
+
 	public void setGuildId(String guildId) {
 		this.guildId = guildId;
 	}
-	
+
 	public List<Role> getRoles() {
 		return roles;
 	}
-	
+
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	public String getRoleNumLimit() {
 		return roleNumLimit;
 	}
-	
+
 	public void setRoleNumLimit(String roleNumLimit) {
 		this.roleNumLimit = roleNumLimit;
 	}

@@ -23,4 +23,12 @@ public class ApiPermissionResponse {
 	 * 机器人可用权限列表
 	 */
 	private List<ApiPermission> apis;
+
+	public List<ApiPermission> getApis() {
+		return apis;
+	}
+
+	public void setApis(List<ApiPermission> apis) {
+		this.apis = apis;
+	}
 }

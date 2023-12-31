@@ -26,35 +26,35 @@ public class ApiPermission {
 	 */
 	@JsonProperty("auth_status")
 	private Integer authStatus;
-	
+
 	public String getPath() {
 		return path;
 	}
-	
+
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	public String getMethod() {
 		return method;
 	}
-	
+
 	public void setMethod(String method) {
 		this.method = method;
 	}
-	
+
 	public String getDesc() {
 		return desc;
 	}
-	
+
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	
+
 	public Integer getAuthStatus() {
 		return authStatus;
 	}
-	
+
 	public void setAuthStatus(Integer authStatus) {
 		this.authStatus = authStatus;
 	}

@@ -19,19 +19,19 @@ public class MemberRequest {
 	 */
 	@JsonProperty("delete_history_msg_days")
 	private Integer deleteHistoryMsgDays;
-	
+
 	public Boolean getAddBlacklist() {
 		return addBlacklist;
 	}
-	
+
 	public void setAddBlacklist(Boolean addBlacklist) {
 		this.addBlacklist = addBlacklist;
 	}
-	
+
 	public Integer getDeleteHistoryMsgDays() {
 		return deleteHistoryMsgDays;
 	}
-	
+
 	public void setDeleteHistoryMsgDays(Integer deleteHistoryMsgDays) {
 		this.deleteHistoryMsgDays = deleteHistoryMsgDays;
 	}

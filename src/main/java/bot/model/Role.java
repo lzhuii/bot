@@ -34,51 +34,51 @@ public class Role {
 	 */
 	@JsonProperty("member_limit")
 	private Integer memberLimit;
-	
+
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Long getColor() {
 		return color;
 	}
-	
+
 	public void setColor(Long color) {
 		this.color = color;
 	}
-	
+
 	public Integer getHoist() {
 		return hoist;
 	}
-	
+
 	public void setHoist(Integer hoist) {
 		this.hoist = hoist;
 	}
-	
+
 	public Integer getNumber() {
 		return number;
 	}
-	
+
 	public void setNumber(Integer number) {
 		this.number = number;
 	}
-	
+
 	public Integer getMemberLimit() {
 		return memberLimit;
 	}
-	
+
 	public void setMemberLimit(Integer memberLimit) {
 		this.memberLimit = memberLimit;
 	}
