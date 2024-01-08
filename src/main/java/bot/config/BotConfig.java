@@ -1,5 +1,6 @@
 package bot.config;
 
+import bot.api.AmapApi;
 import bot.api.ChannelApi;
 import bot.model.Gateway;
 import bot.websocket.BotWebSocketClient;
@@ -13,7 +14,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import java.net.URI;
 
 /**
- * QQ频道 API 接口配置类
+ * 机器人配置类
  *
  * @author hui
  * @since 2023-12-09 09:07:47
@@ -22,7 +23,18 @@ import java.net.URI;
 public class BotConfig {
 
     @Value("${bot.baseUrl}")
-    private String baseUrl;
+    private String botBaseUrl;
+    @Value("${amap.baseUrl}")
+    private String amapBaseUrl;
+
+    @Bean
+    public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
+        Gateway gateway = channelApi.gateway();
+        URI uri = URI.create(gateway.getUrl());
+        BotWebSocketClient client = new BotWebSocketClient(uri);
+        client.connectBlocking();
+        return client;
+    }
 
     @Bean
     ChannelApi channelApi() {
@@ -32,7 +44,7 @@ public class BotConfig {
 
         WebClient client = WebClient
                 .builder()
-                .baseUrl(baseUrl)
+                .baseUrl(botBaseUrl)
                 .defaultHeader("Authorization", authorization)
                 .build();
 
@@ -46,11 +58,16 @@ public class BotConfig {
     }
 
     @Bean
-    public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
-        Gateway gateway = channelApi.gateway();
-        URI uri = URI.create(gateway.getUrl());
-        BotWebSocketClient client = new BotWebSocketClient(uri);
-        client.connectBlocking();
-        return client;
+    public AmapApi amapApi() {
+        WebClient client = WebClient
+                .builder()
+                .baseUrl(amapBaseUrl)
+                .build();
+        WebClientAdapter adapter = WebClientAdapter.create(client);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+                .builder()
+                .exchangeAdapter(adapter)
+                .build();
+        return factory.createClient(AmapApi.class);
     }
 }

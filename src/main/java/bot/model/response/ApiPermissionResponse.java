@@ -11,24 +11,16 @@ import java.util.List;
  * @since 2023-12-12 13:05:11
  */
 public class ApiPermissionResponse {
-	public List<ApiPermission> getApis() {
-		return apis;
-	}
-	
-	public void setApis(List<ApiPermission> apis) {
-		this.apis = apis;
-	}
-	
-	/**
-	 * 机器人可用权限列表
-	 */
-	private List<ApiPermission> apis;
+    /**
+     * 机器人可用权限列表
+     */
+    private List<ApiPermission> apis;
 
-	public List<ApiPermission> getApis() {
-		return apis;
-	}
+    public List<ApiPermission> getApis() {
+        return apis;
+    }
 
-	public void setApis(List<ApiPermission> apis) {
-		this.apis = apis;
-	}
+    public void setApis(List<ApiPermission> apis) {
+        this.apis = apis;
+    }
 }

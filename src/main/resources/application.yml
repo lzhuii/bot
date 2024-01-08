@@ -10,3 +10,6 @@ logging:
 
 bot:
   baseUrl: https://sandbox.api.sgroup.qq.com
+
+amap:
+  baseUrl: https://restapi.amap.com
