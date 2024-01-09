@@ -41,14 +41,12 @@ public class BotWebSocketHandler {
                         WeatherLive weather = amapService.weather(geocode.getAdCode());
                         if (weather != null) {
                             String result = """
-                                    【天气预报】
                                     城市：%s
                                     天气：%s
                                     温度：%s
                                     风向：%s
                                     风力：%s
-                                    湿度：%s
-                                    """.formatted(geocode.getFormattedAddress(),
+                                    湿度：%s""".formatted(geocode.getFormattedAddress(),
                                     weather.getWeather(),
                                     weather.getTemperature(),
                                     weather.getWindDirection(),

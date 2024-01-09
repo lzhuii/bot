@@ -24,12 +24,12 @@ public class AmapService {
     public Geocode geo(String address) {
         String response = amapApi.geo(key, address);
         JsonNode responseNode = JsonUtil.str2node(response);
-        return JsonUtil.str2obj(responseNode.withArray("geocodes").get(0).asText(), Geocode.class);
+        return JsonUtil.str2obj(responseNode.withArray("geocodes").get(0).toString(), Geocode.class);
     }
 
     public WeatherLive weather(String city) {
         String response = amapApi.weather(key, city);
         JsonNode responseNode = JsonUtil.str2node(response);
-        return JsonUtil.str2obj(responseNode.withArray("lives").get(0).asText(), WeatherLive.class);
+        return JsonUtil.str2obj(responseNode.withArray("lives").get(0).toString(), WeatherLive.class);
     }
 }

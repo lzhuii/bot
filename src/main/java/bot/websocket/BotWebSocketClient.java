@@ -34,6 +34,10 @@ public class BotWebSocketClient extends WebSocketClient {
      * 消息序号
      */
     private Integer seq;
+    /**
+     * 重连次数
+     */
+    private Integer attempts = 3;
     @Resource
     private BotWebSocketHandler botWebSocketHandler;
 
@@ -44,6 +48,7 @@ public class BotWebSocketClient extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
         log.info("WebSocket连接已打开");
+        attempts = 3;
     }
 
     @Override
@@ -68,13 +73,17 @@ public class BotWebSocketClient extends WebSocketClient {
     @Override
     public void onClose(int i, String s, boolean b) {
         log.info("WebSocket连接已关闭");
-        new Thread(() -> {
-            try {
-                reconnectBlocking();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).start();
+        if (attempts >= 0) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                    reconnectBlocking();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }).start();
+            attempts -= 1;
+        }
     }
 
     @Override
