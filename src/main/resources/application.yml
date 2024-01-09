@@ -9,7 +9,7 @@ logging:
     name: ./log/bot-core.log
 
 bot:
-  baseUrl: https://sandbox.api.sgroup.qq.com
+  baseUrl: https://api.sgroup.qq.com
 
 amap:
   baseUrl: https://restapi.amap.com

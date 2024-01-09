@@ -1,6 +1,7 @@
 package bot.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -37,6 +38,20 @@ public class JsonUtil {
     public static String obj2str(Object object) {
         try {
             return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Json 字符串转 JsonNode 对象
+     *
+     * @param str Json 字符串
+     * @return JsonNode 对象
+     */
+    public static JsonNode str2node(String str) {
+        try {
+            return objectMapper.readTree(str);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

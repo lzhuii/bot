@@ -20,4 +20,7 @@ public interface AmapApi {
      */
     @GetExchange("/v3/geocode/geo")
     String geo(@RequestParam String key, @RequestParam String address);
+
+    @GetExchange("/v3/weather/weatherInfo")
+    String weather(@RequestParam String key, @RequestParam String city);
 }
