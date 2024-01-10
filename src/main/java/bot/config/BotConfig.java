@@ -1,10 +1,10 @@
 package bot.config;
 
 import bot.api.AmapApi;
+import bot.api.BaiduApi;
 import bot.api.ChannelApi;
 import bot.model.Gateway;
 import bot.websocket.BotWebSocketClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,12 +21,6 @@ import java.net.URI;
  */
 @Configuration
 public class BotConfig {
-
-    @Value("${bot.baseUrl}")
-    private String botBaseUrl;
-    @Value("${amap.baseUrl}")
-    private String amapBaseUrl;
-
     @Bean
     public BotWebSocketClient botWebSocketClient(ChannelApi channelApi) throws InterruptedException {
         Gateway gateway = channelApi.gateway();
@@ -44,12 +38,10 @@ public class BotConfig {
 
         WebClient client = WebClient
                 .builder()
-                .baseUrl(botBaseUrl)
+                .baseUrl("https://api.sgroup.qq.com")
                 .defaultHeader("Authorization", authorization)
                 .build();
-
         WebClientAdapter adapter = WebClientAdapter.create(client);
-
         HttpServiceProxyFactory factory = HttpServiceProxyFactory
                 .builder()
                 .exchangeAdapter(adapter)
@@ -61,7 +53,7 @@ public class BotConfig {
     public AmapApi amapApi() {
         WebClient client = WebClient
                 .builder()
-                .baseUrl(amapBaseUrl)
+                .baseUrl("https://restapi.amap.com")
                 .build();
         WebClientAdapter adapter = WebClientAdapter.create(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory
@@ -69,5 +61,19 @@ public class BotConfig {
                 .exchangeAdapter(adapter)
                 .build();
         return factory.createClient(AmapApi.class);
+    }
+
+    @Bean
+    public BaiduApi baiduApi() {
+        WebClient client = WebClient
+                .builder()
+                .baseUrl("https://aip.baidubce.com")
+                .build();
+        WebClientAdapter adapter = WebClientAdapter.create(client);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+                .builder()
+                .exchangeAdapter(adapter)
+                .build();
+        return factory.createClient(BaiduApi.class);
     }
 }

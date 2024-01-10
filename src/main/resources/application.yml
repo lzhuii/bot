@@ -7,9 +7,3 @@ logging:
     dateformat: yyyy-MM-dd HH:mm:ss
   file:
     name: ./log/bot-core.log
-
-bot:
-  baseUrl: https://api.sgroup.qq.com
-
-amap:
-  baseUrl: https://restapi.amap.com
