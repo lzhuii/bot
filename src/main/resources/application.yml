@@ -16,7 +16,7 @@ spring:
       fail-on-unknown-properties: false
   data:
     redis:
-      host: 192.168.1.100
+      host: 192.168.1.6
   ai:
     openai:
       base-url: https://dashscope.aliyuncs.com/compatible-mode
@@ -24,11 +24,9 @@ spring:
       chat:
         options:
           model: qwen-max-0125
-          max-tokens: 1000
+          max-tokens: 300
 
 bot:
   app-id: ${QQ_BOT_APP_ID}
   app-secret: ${QQ_BOT_APP_SECRET}
-  token-key: access_token:${bot.app-id}
-
 

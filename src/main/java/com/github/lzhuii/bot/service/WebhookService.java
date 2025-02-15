@@ -79,17 +79,17 @@ public class WebhookService {
                 .collectList()
                 .map(responseList -> String.join("", responseList))
                 .flatMap(response -> {
-                    log.info(response);
+                    log.info("调用openai");
                     Message.Request request = Message.Request.builder()
                             .content(response)
                             .msgId(message.getId())
                             .build();
                     // 根据消息类型选择不同的消息发送方法
                     return switch (payload.getT()) {
-                        case "C2C_MESSAGE_CREATE" -> qqBotApi.sendUserMsg(message.getAuthor().getId(), request);
-                        case "GROUP_AT_MESSAGE_CREATE" -> qqBotApi.sendGroupMsg(message.getGroupOpenid(), request);
-                        case "AT_MESSAGE_CREATE" -> qqBotApi.sendChannelMsg(message.getChannelId(), request);
-                        case "DIRECT_MESSAGE_CREATE" -> qqBotApi.sendDirectMsg(message.getGuildId(), request);
+                        case "C2C_MESSAGE_CREATE" -> qqBotApi.sendToUser(message.getAuthor().getId(), request);
+                        case "GROUP_AT_MESSAGE_CREATE" -> qqBotApi.sendToGroup(message.getGroupOpenid(), request);
+                        case "AT_MESSAGE_CREATE" -> qqBotApi.sendToChannel(message.getChannelId(), request);
+                        case "DIRECT_MESSAGE_CREATE" -> qqBotApi.sendToDirect(message.getGuildId(), request);
                         case null, default -> Mono.empty();
                     };
                 })

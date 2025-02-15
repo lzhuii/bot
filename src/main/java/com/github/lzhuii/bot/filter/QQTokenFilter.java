@@ -27,7 +27,7 @@ public class QQTokenFilter implements ExchangeFilterFunction {
     private String appId;
     @Value("${bot.app-secret}")
     private String appSecret;
-    @Value("${bot.token-key}")
+    @Value("access_token:${bot.app-id}")
     private String tokenKey;
 
     private final ReactiveRedisTemplate<String, String> redisTemplate;

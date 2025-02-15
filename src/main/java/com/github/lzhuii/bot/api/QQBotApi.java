@@ -14,14 +14,14 @@ import reactor.core.publisher.Mono;
  */
 public interface QQBotApi {
     @PostExchange("/v2/users/{userId}/messages")
-    Mono<String> sendUserMsg(@PathVariable String userId, @RequestBody Message.Request request);
+    Mono<String> sendToUser(@PathVariable String userId, @RequestBody Message.Request request);
 
     @PostExchange("/channels/{channelId}/messages")
-    Mono<String> sendChannelMsg(@PathVariable String channelId, @RequestBody Message.Request request);
+    Mono<String> sendToChannel(@PathVariable String channelId, @RequestBody Message.Request request);
 
     @PostExchange("/v2/groups/{groupOpenid}/messages")
-    Mono<String> sendGroupMsg(@PathVariable String groupOpenid, @RequestBody Message.Request request);
+    Mono<String> sendToGroup(@PathVariable String groupOpenid, @RequestBody Message.Request request);
 
     @PostExchange("/dms/{guildId}/messages")
-    Mono<String> sendDirectMsg(@PathVariable String guildId, @RequestBody Message.Request request);
+    Mono<String> sendToDirect(@PathVariable String guildId, @RequestBody Message.Request request);
 }

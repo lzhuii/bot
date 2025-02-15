@@ -6,7 +6,6 @@ import com.github.lzhuii.bot.service.WebhookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,9 +22,7 @@ public class WebhookController {
     }
 
     @PostMapping("/webhook")
-    public Object webhook(@RequestHeader("X-Signature-Ed25519") String signature,
-                          @RequestHeader("X-Signature-Timestamp") String timestamp,
-                          @RequestBody Payload<JsonNode> payload) {
+    public Object webhook(@RequestBody Payload<JsonNode> payload) {
         log.info("收到Webhook请求 {}", payload);
         if (payload.getOp() == 13) {
             return webhookService.callbackVerify(payload);
